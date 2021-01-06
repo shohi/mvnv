@@ -1,10 +1,29 @@
 package main
 
-import "github.com/shohi/mvnv/pkg/wrapper"
+import (
+	"os"
+	"path/filepath"
+
+	"github.com/atrox/homedir"
+	"github.com/shohi/mvnv/pkg/wrapper"
+)
 
 func main() {
-	// TODO: support using env to override
-	var binName string = "mvn"
+	// MVNV_BIN points to the maven binary
+	// where MVNV_HOME directs to the location of
+	// default maven version
+	var binName = os.Getenv("MVNV_BIN")
+	if binName == "" {
+		binName = "mvn"
+	}
 
-	wrapper.Wrapper(".mvnv", binName)
+	var mvnvHome = os.Getenv("MVNV_HOME")
+	if mvnvHome == "" {
+		h, _ := homedir.Dir()
+		mvnvHome = filepath.Join(h, ".mvnv")
+	} else {
+		mvnvHome, _ = homedir.Expand(mvnvHome)
+	}
+
+	wrapper.Wrapper(mvnvHome, binName)
 }

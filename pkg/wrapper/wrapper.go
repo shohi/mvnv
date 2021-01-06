@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/mitchellh/go-homedir"
 	"github.com/shohi/mvnv/pkg/util"
 )
 
@@ -27,9 +26,7 @@ func resolveVersion(baseDir, binName string) (string, error) {
 	}
 
 	// check default version if local one is not set
-	home, _ := homedir.Dir()
-	baseDirPath := fmt.Sprintf("%s/%s", home, baseDir)
-	defaultVersionPath := fmt.Sprintf("%s/.%s-version", baseDirPath, binName)
+	defaultVersionPath := fmt.Sprintf("%s/.%s-version", baseDir, binName)
 
 	defaultVersion, err := util.LoadVersion(defaultVersionPath)
 	if err != nil {
