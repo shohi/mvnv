@@ -10,4 +10,6 @@ install:
 	@# install mvn wrapper
 	@cd cmd/mvn && $(GOENV) go install .
 
+# TODO: add build
+
 .phony: install
