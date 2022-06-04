@@ -16,3 +16,6 @@
 
 # binaries
 bin/
+
+# undo-tree
+*.~undo-tree~
